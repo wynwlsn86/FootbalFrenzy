@@ -1,0 +1,3 @@
+      invoke  active_record
+      create    db/migrate/20190602180329_create_teams.rb
+      create    app/models/team.rb
