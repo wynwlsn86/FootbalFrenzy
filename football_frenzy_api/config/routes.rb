@@ -1,8 +1,12 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  resources :users
-  resources :players
+  scope '/leagues/:league_id/team/:team_id' do
+    resources :users
+  end
+  scope '/users/:user_id/' do
+    resources :leagues
+  end
 
   scope '/players/:player_id' do
     resources :teams

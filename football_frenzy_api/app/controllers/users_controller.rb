@@ -9,8 +9,21 @@ class UsersController < ApplicationController
   end
 
   def index
+    @league = League.find(params[:league_id])
+    @team = Team.find(params[:team_id])
     @users = User.all
-    render json: @users
+    render json: @users, include: [:leagues, :teams]
+  end
+
+
+  def update
+
+  end
+
+  def delete
+    @user = User.find(params[:id])
+    @user.destroy
+    render json: {message: 'User delted'}
   end
 
   private

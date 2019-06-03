@@ -15,6 +15,8 @@ User.create(email: 'test2@test2.com', password: 'test2', commish: true)
 
 League.create(name: 'test league2', limit: 16, league_pin: 12345)
 League.create(name: 'test league', limit: 16, league_pin: 12345)
+League.create(name: 'test league3', limit: 16, league_pin: 12345)
+League.create(name: 'test league4', limit: 16, league_pin: 12345)
 
 dallas = Team.create(name: 'test nfl_team', points: 0)
 Team.create(name: 'test team2', points: 0)
@@ -29,7 +31,11 @@ Player.create(displayName: 'This Aikman', nfl_team: 'DAL', position: 'QB', point
 # author1.books.push(book1, book2)
 
 User.find(1).leagues.push(League.find(1), League.find(2))
-User.find(1).teams.push(Team.find(3), Team.find(4))
+User.find(2).leagues.push(League.find(3), League.find(4))
+User.find(2).leagues.push(League.find(1), League.find(2))
+# User.find(1).teams.push(Team.find(3), Team.find(4))
+# User.find(2).teams.push(Team.find(1), Team.find(2))
+Team.find(1).update(user_id: User.find(1).id)
 
 Player.create([
 
