@@ -19,7 +19,7 @@ Project Description
 
 ERD
 
-
+![20190603_090136](https://user-images.githubusercontent.com/47395471/58806509-51a02c00-85e4-11e9-804c-a7e9f290de85.jpg)
 
 
 API Endpoints
@@ -49,7 +49,13 @@ Sample API JSON
     }
 
 Wireframes
-
+![20190602_132726](https://user-images.githubusercontent.com/47395471/58806500-51079580-85e4-11e9-87fb-dad78f1e1c12.jpg)
+![20190602_132738](https://user-images.githubusercontent.com/47395471/58806501-51079580-85e4-11e9-880c-567e2dd70604.jpg)
+![20190602_132745](https://user-images.githubusercontent.com/47395471/58806502-51a02c00-85e4-11e9-956f-293f34ff6277.jpg)
+![20190602_132752](https://user-images.githubusercontent.com/47395471/58806503-51a02c00-85e4-11e9-8465-c62b5bd86df5.jpg)
+![20190602_132817](https://user-images.githubusercontent.com/47395471/58806504-51a02c00-85e4-11e9-9270-26aa3ffea2c5.jpg)
+![20190602_132826](https://user-images.githubusercontent.com/47395471/58806505-51a02c00-85e4-11e9-9ec9-f3caf132d982.jpg)
+![20190602_132833](https://user-images.githubusercontent.com/47395471/58806507-51a02c00-85e4-11e9-81ce-f5c7454dc096.jpg)
 
 Dependencies
 
