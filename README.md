@@ -71,3 +71,4 @@ Schedule
   Tuesday - React: Landing Page, Profile Page, League Home
   Wednesday - React: Team View Page, Add player page, Login/Sign Up Page
   Thursday - Auth Login
+  
