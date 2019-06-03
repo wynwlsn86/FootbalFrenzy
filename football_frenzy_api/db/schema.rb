@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_02_225835) do
+ActiveRecord::Schema.define(version: 2019_06_03_143917) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 2019_06_02_225835) do
 
   create_table "players", force: :cascade do |t|
     t.string "displayName"
-    t.string "team"
+    t.string "nfl_team"
     t.float "points"
     t.string "position"
     t.string "playerId"
@@ -50,6 +50,14 @@ ActiveRecord::Schema.define(version: 2019_06_02_225835) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "team_id"
+    t.string "active"
+    t.string "jersey"
+    t.string "fname"
+    t.string "lname"
+    t.string "height"
+    t.string "weight"
+    t.string "dob"
+    t.string "college"
     t.index ["team_id"], name: "index_players_on_team_id"
   end
 
