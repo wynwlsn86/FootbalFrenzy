@@ -23,9 +23,9 @@ Team.create(name: 'test team4', points: 0)
 
 
 # PlayerPool.create(displayName: 'Tony Romo', team: 'DAL', position: 'QB', points: 0)
-Player.create(displayName: 'Troy Aikman', team: 'DAL', position: 'QB', points: 0, team_id: dallas.id)
-Player.create(displayName: 'This Aikman', team: 'DAL', position: 'QB', points: 0, team_id: dallas.id)
-Player.create(displayName: 'This Aikman', team: 'DAL', position: 'QB', points: 0)
+Player.create(displayName: 'Troy Aikman', nfl_team: 'DAL', position: 'QB', points: 0, team_id: dallas.id)
+Player.create(displayName: 'This Aikman', nfl_team: 'DAL', position: 'QB', points: 0, team_id: dallas.id)
+Player.create(displayName: 'This Aikman', nfl_team: 'DAL', position: 'QB', points: 0)
 # author1.books.push(book1, book2)
 
 User.find(1).leagues.push(League.find(1), League.find(2))

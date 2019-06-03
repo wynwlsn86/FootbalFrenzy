@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 2019_06_02_225835) do
 
   create_table "players", force: :cascade do |t|
     t.string "displayName"
-    t.string "team"
+    t.string "nfl_team"
     t.float "points"
     t.string "position"
     t.string "playerId"
