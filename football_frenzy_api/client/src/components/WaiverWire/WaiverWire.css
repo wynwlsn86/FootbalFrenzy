@@ -1,0 +1,26 @@
+#playerCard{
+  height: 200px;
+  width: 235px;
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+  margin: 12px 4px;
+  padding: 10px 0px 10px 10px;
+  border-radius: 10px;
+  box-shadow: 10px 5px 5px grey;
+  border: darkgrey solid 1px;
+}
+.flex{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.pointer:hover{
+  cursor: pointer;
+}
+
+i {
+  font-size: 1.8em !important;
+  margin-left: -10px !important;
+  margin-right: 15px !important;
+}
