@@ -93,7 +93,7 @@ class WaiverWire extends Component {
                 </div>
                 
             </div>
-          )
+          ).slice(0, 25)
      
           }
         </div>
