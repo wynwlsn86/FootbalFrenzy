@@ -6,8 +6,10 @@ import League from '../League/League'
 import {
   fetchAllUsers,
   fetchAllPlayers,
-  updateUser,
-  fetchAllTeams
+  updatePlayersTeam,
+  fetchAllTeams,
+  fetchPlayer,
+  updateTeam
 } from '../../services/apiServices'
 import Team from '../Team/Team'
 import WaiverWire from '../WaiverWire/WaiverWire';
@@ -20,7 +22,9 @@ class Main extends Component {
       teams: [],
       email: [],
       allTeams: [],
-      allPlayers: []
+      allPlayers: [],
+      updatedPlayer: {},
+      team_id: null
     }
   }
   componentDidMount = () => {
@@ -39,12 +43,10 @@ class Main extends Component {
   }
   fetchPlayerData = async() => {
     const playerData = await fetchAllPlayers();
-    await console.log(playerData)
     this.setState({allPlayers: playerData})
   }
   fetchTeamData = async () => {
     const teamsData = await fetchAllTeams();
-    console.log('team', teamsData)
     this.setState({
       allTeams: teamsData
       })
@@ -52,13 +54,46 @@ class Main extends Component {
   }
 
   updateUserData = async(e) => {
+    // const {data} = e.target;
     e.preventDefault();
-    console.log(e.target.id);
+    const teamid = e.target.id[0]
+    const playerid = e.target.id.split(',')[1]
+    const params = {team_id: teamid}
+    const player = await updatePlayersTeam(playerid, params)
+    await this.setState({updatedPlayer: player, team_id: teamid})
+    await this.updatePosition(e)
     this.fetchTeamData();
-    // const data =  null;
-    // const userUpdate = await updateUser();
-    // await console.log(userUpdate)
-    // fetchAllUsers();
+  }
+
+  setSelectedTeam = (e) => {
+    console.log(this.state.allTeams)
+    console.log(e.target.id)
+    let team = this.state.allTeams.filter(team => {
+      console.log('filter')
+      return team.id == e.target.id
+    })
+    console.log(team)
+    this.setState({selectedTeam: team[0]})
+  }
+
+  updatePosition = async(e) => {
+    switch(this.state.updatedPlayer.position){
+      case "QB" : 
+          // if(this.state.updatedPlayer)
+          return (updateTeam(this.state.team_id, {qb: this.state.updatedPlayer.displayName}))
+      case "RB" :
+          return (updateTeam(this.state.team_id, {rb1: this.state.updatedPlayer.displayName}))
+      case "WR" :
+          return (updateTeam(this.state.team_id, {wr1: this.state.updatedPlayer.displayName}))
+      case "TE": 
+          return (updateTeam(this.state.team_id, {te: this.state.updatedPlayer.displayName}))
+      case "DEF":
+          return (updateTeam(this.state.team_id, {def: this.state.updatedPlayer.displayName}))
+      case "K" :
+          return (updateTeam(this.state.team_id, {k: this.state.updatedPlayer.displayName}))
+      default :
+        return ('nothing')
+    }
   }
 
   
@@ -77,7 +112,8 @@ class Main extends Component {
             component={(props)=>
               <League 
                 {...props}
-                allTeams={this.state.allTeams}/>}
+                allTeams={this.state.allTeams}
+                setSelectedTeam={this.setSelectedTeam}/>}
               />
           <Route 
             exact path={`/teams/:id`}

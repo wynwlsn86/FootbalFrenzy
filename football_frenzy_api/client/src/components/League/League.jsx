@@ -19,7 +19,9 @@ class League extends Component {
                       state: {team},
                     }
                   }>
-                  <Button>{team.name}</Button>
+                  <Button 
+                    id={team.id}
+                    onClick={this.props.setSelectedTeam}>{team.name}</Button>
                 </Link>
             
           })

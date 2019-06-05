@@ -10,7 +10,18 @@ class Team extends Component {
 
     return (
       <div>
-        <Button><Link to='/dashboard'>Dashboard</Link></Button>
+        <Button>
+
+        <Link 
+                  to={
+                    {
+                      pathname: `/waiverwire`,
+                      state: {team},
+                    }
+                  }>
+                    Waiver Wire
+        </Link>
+        </Button>
         <h1>{team.name}</h1>
         <li>QB: {team.qb}</li>
         <li>RB1: {team.rb1}</li>

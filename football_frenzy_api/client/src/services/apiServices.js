@@ -32,10 +32,33 @@ export const fetchAllPlayers = async () => {
   }
 }
 
-export const updateUser = async (params) => {
+export const updatePlayersTeam = async (player_id, params) => {
   try{
-    const user = await axios.put(`${URL}/leagues/1/team/1/users/1`, params)
-    console.log(user.data)
+    console.log(player_id)
+    const player = await axios.put(`${URL}/players/${player_id}`, params)
+    console.log(player.data)
+    return player.data
+  }
+  catch(e){
+    console.log(e.message)
+  }
+}
+export const updateTeam = async (team_id, params) => {
+  try{
+    console.log(params, 'parms')
+    const team = await axios.put(`${URL}/players/1/teams/${team_id}`, params)
+    console.log(team.data)
+    return team.data
+  }
+  catch(e){
+    console.log(e.message)
+  }
+}
+
+export const fetchPlayer = async(player_id) => {
+  try{
+    const player = await axios.get(`${URL}/players/${player_id}`)
+    console.log(player.data)
   }
   catch(e){
     console.log(e.message)

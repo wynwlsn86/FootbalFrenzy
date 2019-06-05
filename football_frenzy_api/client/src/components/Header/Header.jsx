@@ -8,9 +8,10 @@ class Header extends Component {
     return (
       <div>
            <Button size='large' inverted color='green'><Link to='/'>Home</Link></Button>
-           <Link to='/login'><Button size='massive'>Login</Button></Link>
+          <Link to='/login'><Button size='massive'>Login</Button></Link>
           <Button size='large'><Link to='/signup'>signup</Link></Button>
-          <Button><Link to='/waiverwire'>Waiver Wire</Link></Button>
+          <Button><Link to='/dashboard'>Dashboard</Link></Button>
+              
  
         
         
