@@ -12,6 +12,11 @@ class WaiverWire extends Component {
     const { name, value } = e.target;    
     this.setState({ [name]: value });
 }
+
+handleUpdate= (e) => {
+  this.props.fetchUserData();
+  this.props.updateUserData(e)
+}
   render() {
     return (
       <div>
@@ -32,10 +37,13 @@ class WaiverWire extends Component {
               }).map((player, id) => 
               <div id='playerCard'>
               <i 
-                id={[this.props.location.state.team.id, player.id]}
+                id={[this.props.location.state.selectedTeam.id, player.id]}
                 className="pointer plus square icon" 
                 size='large'
-                onClick={this.props.updateUserData}></i> 
+                onClick={this.handleUpdate}
+                // onClick={this.props.updateUserData}
+              >
+              </i> 
                 <div>
                   <h3>Name: {player.displayName}</h3>
                   <h4>Team: {player.nfl_team}</h4>

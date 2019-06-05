@@ -2,35 +2,60 @@ import React, { Component } from 'react';
 import LandingPage from '../LandingPage.jsx/LandingPage'
 import Dashboard from '../Dashboard/Dashboard'
 import {Route, Switch} from 'react-router-dom'
-import League from '../League/League'
+// import League from '../League/League'
 import {
   fetchAllUsers,
   fetchAllPlayers,
   updatePlayersTeam,
   fetchAllTeams,
   fetchPlayer,
-  updateTeam
+  fetchTeam,
+  updateTeam,
+  fetchLeagueTeams
 } from '../../services/apiServices'
 import Team from '../Team/Team'
 import WaiverWire from '../WaiverWire/WaiverWire';
+import TeamLeagues from '../TeamLeagues/TeamLeagues'
 
 class Main extends Component {
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
     this.state = {
       leagues: [],
+      selectedLeague: null,
       teams: [],
       email: [],
       allTeams: [],
       allPlayers: [],
       updatedPlayer: {},
+      league_id: null,
       team_id: null,
-      search: null
+      search: null,
+      user: null,
+      selectedTeam: null,
+      temp: null,
+      initalTeam: false
     }
   }
   componentDidMount = () => {
       this.fetchUserData();
       this.fetchPlayerData();
+  }
+
+  fetchSelectedTeamData = async (id) => {
+    const selectedTeam = await fetchTeam(id);
+    this.setState({selectedTeam})
+  }
+
+  setSelectedLeague = async (league_id) => {
+    const selectedLeague = await fetchLeagueTeams(league_id)
+    this.setState({selectedLeague})
+  }
+
+  setLeagueId = (e) => {
+    let leagueid = e.target.id
+    console.log('setting leagueid')
+    this.setState({league_id: leagueid})
   }
 
   fetchUserData = async () => {
@@ -60,35 +85,61 @@ class Main extends Component {
 
   updateUserData = async(e) => {
     e.preventDefault();
-    const teamid = e.target.id[0]
-    const playerid = e.target.id.split(',')[1]
+    console.log('update user running')
+    // const teamid = e.target.id[0]
+    // this.setState({team_id: teamid})
+    // const playerid = e.target.id.split(',')[1]
+    await this.setState({temp: e.target.id})
+    const teamid = this.state.selectedTeam.id
+    this.setState({team_id: teamid})
+    const playerid = this.state.temp.split(',')[1]
     const params = {team_id: teamid}
     const player = this.state.allPlayers.find(player => player.id == playerid)
     await this.setState({updatedPlayer: player, team_id: teamid})
         if(this.state.updatedPlayer.team_id == null){
+          
           await updatePlayersTeam(playerid, params)
           await this.updatePosition(e)
-          this.fetchTeamData();
+          this.fetchTeamData(teamid);
         }
         else{
           alert('player already selected')
         }
-    
-    
-    
+    const team = await fetchTeam(this.state.team_id);
+    console.log(team, 'team in update')
+    const selectedTeam = await updateTeam(this.state.team_id, {points: 0})
+    console.log(selectedTeam, 'temp')
+    await this.setState({selectedTeam})
+    console.log(this.state.selectedTeam, 'selected team temp')
   }
 
-  setSelectedTeam = (e) => {
-    let team = this.state.allTeams.filter(team => {
-      return team.id == e.target.id
-    })
-    this.setState({selectedTeam: team[0]})
+  setUser = (user) => {
+    this.setState({user})
+  }
+
+
+  setSelectedTeam = async (team) => {
+    // await this.updateUserData();
+    if(!this.state.initialTeam){
+      // await this.updateUserData();
+      await this.setState({
+        selectedTeam: team,
+        initalTeam: true
+      })
+      console.log('i dont even care what u say')
+    }
+    else{
+      console.log('alreadyset')
+    }
   }
 
   updatePosition = async(e) => {
     switch(this.state.updatedPlayer.position){
       case "QB" : 
-            return (updateTeam(this.state.team_id, {qb: this.state.updatedPlayer.displayName}))
+            
+            return (
+              updateTeam(this.state.team_id, {qb: this.state.updatedPlayer.displayName})
+              )
       case "RB" :
         if(!this.state.selectedTeam.rb1){
           return (updateTeam(this.state.team_id, {rb1: this.state.updatedPlayer.displayName}))
@@ -119,20 +170,37 @@ class Main extends Component {
         <Switch>
           <Route 
             exact path='/'
-            render={(props) => <LandingPage />} />
-          <Route 
+            render={(props) => 
+              <LandingPage 
+              setUser={this.setUser}
+              user={this.state.user}/>} 
+            />
+          {/* <Route 
             exact path={`/leagues/:id`}
             component={(props)=>
               <League 
                 {...props}
-                allTeams={this.state.allTeams}
+                leagues={this.state.user.leagues}
                 setSelectedTeam={this.setSelectedTeam}/>}
+              /> */}
+            <Route 
+              exact path={`/teamleagues/:id`}
+              component={(props)=>
+                  <TeamLeagues 
+                    {...props}
+                    selectedTeam={this.state.selectedTeam}
+                    setLeagueId={this.setLeagueId}
+                    fetchUserData={this.fetchUserData}
+                    setSelectedTeam={this.setSelectedTeam}
+                    userTeams={this.state.user.teams}/>}
               />
           <Route 
             exact path={`/teams/:id`}
             component={(props)=>
               <Team 
                 {...props}
+                setSelectedTeam={this.setSelectedTeam}
+                selectedTeam={this.state.selectedTeam}
                 allTeams={this.state.AllTeams}/>}
               />
           <Route 
@@ -140,6 +208,7 @@ class Main extends Component {
             component={(props)=>
               <WaiverWire 
                 {...props}
+                fetchUserData={this.fetchUserData}
                 search={this.state.search}
                 allPlayers={this.state.allPlayers}
                 updateUserData={this.updateUserData}
@@ -151,8 +220,9 @@ class Main extends Component {
             exact path='/dashboard'
             render={(props) => 
               <Dashboard 
+                fetchUserData={this.fetchUserData}
                 leagues={this.state.leagues}
-                fetchTeamData={this.fetchTeamData}
+                fetchSelectedTeamData={this.fetchSelectedTeamData}
                 allTeams={this.state.allTeams}
               />} 
           />

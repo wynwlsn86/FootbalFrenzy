@@ -7,10 +7,11 @@ import {fetchAllTeams} from '../../services/apiServices'
 
 
 class Dashboard extends Component {
-  componentDidMount() {
-    this.props.fetchTeamData();
+  componentDidMount(props) {
+    this.props.fetchUserData()
+    console.log('dashboard fetch')
   }
-  
+  //needs team id
 
   render() {
     const {leagues} = this.props
@@ -25,13 +26,12 @@ class Dashboard extends Component {
             return <Link 
                   to={
                     {
-                      pathname: `leagues/${league.id}`,
+                      pathname: `teamleagues/${league.id}`,
                       state: {league},
                     }
                   }>
                   <Button>{league.name}</Button>
                 </Link>
-            
           })
         }
       </div>

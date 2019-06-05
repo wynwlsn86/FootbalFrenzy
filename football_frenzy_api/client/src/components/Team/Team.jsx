@@ -5,8 +5,7 @@ import { Button } from 'semantic-ui-react'
 class Team extends Component {
   
   render() {
-    const {team} = this.props.location.state
-    console.log(team)
+    const {selectedTeam} = this.props
 
     return (
       <div>
@@ -16,24 +15,24 @@ class Team extends Component {
                   to={
                     {
                       pathname: `/waiverwire`,
-                      state: {team},
+                      state: {selectedTeam},
                     }
                   }>
                     Waiver Wire
         </Link>
         </Button>
-        <h1>{team.name}</h1>
-        <li>QB: {team.qb}</li>
-        <li>RB1: {team.rb1}</li>
-        <li>RB2: {team.rb2}</li>
-        <li>WR1: {team.wr1}</li>
-        <li>WR2: {team.wr2}</li>
-        <li>TE: {team.te}</li>
-        <li>FLEX: {team.flex}</li>
-        <li>DEF: {team.def}</li>
-        <li>K: {team.k}</li>
-        <li>Bench 1: {team.bn1}</li>
-        <li>Bench 2: {team.bn2}</li>
+        <h1>{selectedTeam.name}</h1>
+        <li>QB: {selectedTeam.qb}</li>
+        <li>RB1: {selectedTeam.rb1}</li>
+        <li>RB2: {selectedTeam.rb2}</li>
+        <li>WR1: {selectedTeam.wr1}</li>
+        <li>WR2: {selectedTeam.wr2}</li>
+        <li>TE: {selectedTeam.te}</li>
+        <li>FLEX: {selectedTeam.flex}</li>
+        <li>DEF: {selectedTeam.def}</li>
+        <li>K: {selectedTeam.k}</li>
+        <li>Bench 1: {selectedTeam.bn1}</li>
+        <li>Bench 2: {selectedTeam.bn2}</li>
       </div>
     );
   }
