@@ -24,7 +24,8 @@ class Main extends Component {
       allTeams: [],
       allPlayers: [],
       updatedPlayer: {},
-      team_id: null
+      team_id: null,
+      search: null
     }
   }
   componentDidMount = () => {
@@ -50,8 +51,12 @@ class Main extends Component {
     this.setState({
       allTeams: teamsData
       })
-
   }
+
+  handleFormChange = (e) => {
+    const { name, value } = e.target;    
+    this.setState({ [name]: value });
+}
 
   updateUserData = async(e) => {
     // const {data} = e.target;
@@ -66,23 +71,23 @@ class Main extends Component {
   }
 
   setSelectedTeam = (e) => {
-    console.log(this.state.allTeams)
-    console.log(e.target.id)
     let team = this.state.allTeams.filter(team => {
-      console.log('filter')
       return team.id == e.target.id
     })
-    console.log(team)
     this.setState({selectedTeam: team[0]})
   }
 
   updatePosition = async(e) => {
     switch(this.state.updatedPlayer.position){
       case "QB" : 
-          // if(this.state.updatedPlayer)
-          return (updateTeam(this.state.team_id, {qb: this.state.updatedPlayer.displayName}))
+            return (updateTeam(this.state.team_id, {qb: this.state.updatedPlayer.displayName}))
       case "RB" :
+        if(!this.state.selectedTeam.rb1){
           return (updateTeam(this.state.team_id, {rb1: this.state.updatedPlayer.displayName}))
+        }
+        else{
+          return (updateTeam(this.state.team_id, {rb2: this.state.updatedPlayer.displayName}))
+        }
       case "WR" :
           return (updateTeam(this.state.team_id, {wr1: this.state.updatedPlayer.displayName}))
       case "TE": 
@@ -127,8 +132,12 @@ class Main extends Component {
             component={(props)=>
               <WaiverWire 
                 {...props}
+                search={this.state.search}
                 allPlayers={this.state.allPlayers}
-                updateUserData={this.updateUserData}/>}
+                updateUserData={this.updateUserData}
+                handleFormChange={this.handleFormChange}
+                />}
+                
               />
           <Route 
             exact path='/dashboard'
