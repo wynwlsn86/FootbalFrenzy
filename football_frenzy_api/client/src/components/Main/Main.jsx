@@ -59,15 +59,23 @@ class Main extends Component {
 }
 
   updateUserData = async(e) => {
-    // const {data} = e.target;
     e.preventDefault();
     const teamid = e.target.id[0]
     const playerid = e.target.id.split(',')[1]
     const params = {team_id: teamid}
-    const player = await updatePlayersTeam(playerid, params)
+    const player = this.state.allPlayers.find(player => player.id == playerid)
     await this.setState({updatedPlayer: player, team_id: teamid})
-    await this.updatePosition(e)
-    this.fetchTeamData();
+        if(this.state.updatedPlayer.team_id == null){
+          await updatePlayersTeam(playerid, params)
+          await this.updatePosition(e)
+          this.fetchTeamData();
+        }
+        else{
+          alert('player already selected')
+        }
+    
+    
+    
   }
 
   setSelectedTeam = (e) => {
