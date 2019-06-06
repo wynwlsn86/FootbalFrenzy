@@ -91,6 +91,7 @@ export const updateTeam = async (team_id, params) => {
   }
 }
 
+
 export const createTeam = async (params) => {
   try{
     const newTeam = await axios.post(`${URL}/players/1/teams/`, params)

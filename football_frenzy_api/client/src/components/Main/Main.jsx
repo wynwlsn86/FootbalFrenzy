@@ -199,6 +199,7 @@ class Main extends Component {
             component={(props)=>
               <Team 
                 {...props}
+                allPlayers={this.state.allPlayers}
                 setSelectedTeam={this.setSelectedTeam}
                 selectedTeam={this.state.selectedTeam}
                 allTeams={this.state.AllTeams}/>}

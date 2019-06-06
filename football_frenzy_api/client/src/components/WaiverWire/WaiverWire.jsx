@@ -13,6 +13,8 @@ class WaiverWire extends Component {
     this.setState({ [name]: value });
 }
 
+
+
 handleUpdate= (e) => {
   this.props.fetchUserData();
   this.props.updateUserData(e)
