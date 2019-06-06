@@ -37,11 +37,11 @@ class TeamsController < ApplicationController
   private
 
   def create_team_params
-    params.require(:team).permit(:name)
+    params.require(:team).permit(:name, :user_id, :league_id,)
   end
 
   def update_team_params
-    params.require(:team).permit(:name, :points, :qb, :rb1, :rb2, :te, :wr1, :wr2, :def, :k, :flex, :bn1, :bn2, :bn3, :points)
+    params.require(:team).permit(:name, :user_id, :league_id, :points, :qb, :rb1, :rb2, :te, :wr1, :wr2, :def, :k, :flex, :bn1, :bn2, :bn3)
   end
 
 end
