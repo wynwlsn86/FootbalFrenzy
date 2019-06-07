@@ -1,0 +1,43 @@
+.team-page-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+}
+
+.team-page-column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+}
+
+.team-page-stats {
+    width: 600px;
+    height: 300px;
+    list-style: none;
+    height: 12vh;
+    margin-left: 0px;
+    margin-right: 0px;
+    text-align: center;
+}
+
+.team-page-title {
+  display: flex;
+  justify-content: center;
+}
+
+.team-page-delete-button {
+  margin: 10px;
+  padding: 5px;
+}
+
+.team-stat-color-qb {
+  padding: 0px 10px;
+  background-color: cadetblue;
+
+  margin-top: 5px;
+}
+

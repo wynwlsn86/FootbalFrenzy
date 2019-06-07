@@ -7,4 +7,10 @@ footer{
   background-color: grey;
   color: white;
   height: 50px;
+  position: fixed;
+  bottom: 0;
+}
+
+.footer-container {
+  min-height: 10vh;
 }

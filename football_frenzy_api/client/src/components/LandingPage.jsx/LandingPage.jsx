@@ -14,8 +14,6 @@ class LandingPage extends Component {
         <div>
           <Login 
             setUser={this.props.setUser}/>
-          <SignUp />
-          <li>Landing Page</li>
         </div>
       );
     }

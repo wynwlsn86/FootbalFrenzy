@@ -41,7 +41,7 @@ export const fetchAllTeams = async () => {
 export const fetchTeam = async (team_id) => {
   try{
     const team = await axios.get(`${URL}/players/1/teams/${team_id}`)
-    console.log('selected team', team.data)
+    console.log('single team fetch')
     return team.data
   }
   catch(e){
@@ -70,9 +70,8 @@ export const fetchAllPlayers = async () => {
 // }
 export const updatePlayersTeam = async (player_id, params) => {
   try{
-    console.log(player_id)
     const player = await axios.put(`${URL}/players/${player_id}`, params)
-    console.log(player.data)
+    console.log('player updated')
     return player.data
   }
   catch(e){
@@ -81,10 +80,20 @@ export const updatePlayersTeam = async (player_id, params) => {
 }
 export const updateTeam = async (team_id, params) => {
   try{
-    console.log(params, 'parms')
     const team = await axios.put(`${URL}/players/1/teams/${team_id}`, params)
-    console.log(team.data)
+    console.log('position updated')
+    console.log('************************')
     return team.data
+  }
+  catch(e){
+    console.log(e.message)
+  }
+}
+
+export const deleteTeam = async (id) => {
+  try{
+    const deleting = await axios.delete(`${URL}/players/1/teams/${id}`)
+    return deleting.data
   }
   catch(e){
     console.log(e.message)
@@ -95,7 +104,7 @@ export const updateTeam = async (team_id, params) => {
 export const createTeam = async (params) => {
   try{
     const newTeam = await axios.post(`${URL}/players/1/teams/`, params)
-    console.log(newTeam.data, 'teamcreated')
+    console.log('teamcreated')
     return newTeam.data
   }
   catch(e){
@@ -106,7 +115,7 @@ export const createTeam = async (params) => {
 export const fetchPlayer = async(player_id) => {
   try{
     const player = await axios.get(`${URL}/players/${player_id}`)
-    console.log(player.data)
+    console.log('sinple player fetch')
   }
   catch(e){
     console.log(e.message)

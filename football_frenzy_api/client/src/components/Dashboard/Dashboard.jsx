@@ -16,13 +16,12 @@ class Dashboard extends Component {
   render() {
     const {leagues} = this.props
     const {allTeams} = this.props
-    console.log(allTeams)
     return (
       <div>
+        <div className="dashboard-container">
         {/* <img src={landingImage} alt='' /> */}
         {
           leagues.map(league => {
-            console.log(league)
             return <Link 
                   to={
                     {
@@ -34,6 +33,7 @@ class Dashboard extends Component {
                 </Link>
           })
         }
+      </div>
       </div>
     );
   }

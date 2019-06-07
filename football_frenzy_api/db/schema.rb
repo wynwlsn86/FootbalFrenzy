@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(version: 2019_06_03_182331) do
     t.string "flex"
     t.string "bn1"
     t.string "bn2"
+    t.string "userId"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "league_id"

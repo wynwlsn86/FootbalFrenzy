@@ -12,7 +12,7 @@ class League extends Component {
     // console.log(allTeams, 'allteams')
     return (
       <div>
-        League
+        <h1>Leagues</h1>
         {
           this.props.leagues.map(team => {
             console.log(team)
@@ -34,6 +34,7 @@ class League extends Component {
           })
         }
         <h1>{this.props.location.state.league.id}</h1>
+          
       </div>
     );
   }

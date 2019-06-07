@@ -21,6 +21,7 @@ class SignUp extends Component {
     console.log(params)
     let newTeam = await createTeam(params)
     console.log(newTeam, 'new team in front end')
+    this.props.fetchUserData();
 
   }
 

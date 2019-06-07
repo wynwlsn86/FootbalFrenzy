@@ -1,8 +1,8 @@
 #playerCard{
-  height: 200px;
+  height: 280px;
   width: 235px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   background-color: white;
   margin: 12px 4px;
   padding: 10px 0px 10px 10px;
@@ -10,7 +10,7 @@
   box-shadow: 10px 5px 5px grey;
   border: darkgrey solid 1px;
 }
-.flex{
+.waiverwire-flex{
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -21,6 +21,21 @@
 
 i {
   font-size: 1.8em !important;
-  margin-left: -10px !important;
+  /* margin-left: -10px !important; */
   margin-right: 15px !important;
+}
+
+.waiverwire-team-status {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5px;
+  margin-top: -10px;
+
+}
+
+.waiverwire-stats-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 16px;
 }

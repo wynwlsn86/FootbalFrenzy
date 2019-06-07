@@ -1,0 +1,26 @@
+.login-input {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 10px;
+}
+
+.login-button {
+  display: flex;
+  justify-content: center;
+}
+
+
+.login-submit {
+  background-color: silver;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.login-title {
+  display: flex;
+  justify-content: center;
+}
+
+input {
+  outline: none;
+}

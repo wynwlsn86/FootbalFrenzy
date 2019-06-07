@@ -5,3 +5,9 @@
 img{
   width: 100%;
 }
+
+.dashboard-container {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 50px;
+}

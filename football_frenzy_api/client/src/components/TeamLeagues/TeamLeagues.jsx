@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import { Button } from 'semantic-ui-react'
 import {Link} from 'react-router-dom'
+import "./TeamLeagues.css";
 
 class TeamLeagues extends Component {
   render() {
     return (
       <div>
-        ALL Teams
+        <h1 className="team-leagues-title">All Teams</h1>
+        <div className="team-leagues-container">
         {
         this.props.userTeams.map(team => {
-          console.log('map',team)
             return <Link 
                   to={
                     {
@@ -24,6 +25,10 @@ class TeamLeagues extends Component {
             
           })
         }
+        </div>
+        <div className="team-leagues-addteam">
+        <Link to='/signup'><button>Add A Team</button></Link>
+      </div>
       </div>
     );
   }

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import LandingPage from '../LandingPage.jsx/LandingPage'
 import Dashboard from '../Dashboard/Dashboard'
 import {Route, Switch} from 'react-router-dom'
+import './Main.css'
+
 // import League from '../League/League'
 import {
   fetchAllUsers,
@@ -14,6 +16,8 @@ import {
   fetchLeagueTeams
 } from '../../services/apiServices'
 import Team from '../Team/Team'
+// import SignUp from '../SignUp/SignUp'
+import SignUp from '../SignUp/SignUp'
 import WaiverWire from '../WaiverWire/WaiverWire';
 import TeamLeagues from '../TeamLeagues/TeamLeagues'
 
@@ -83,23 +87,25 @@ class Main extends Component {
     this.setState({ [name]: value });
 }
 
-  updateUserData = async(e) => {
-    e.preventDefault();
+  updateUserData = async(playerid) => {
+    // e.preventDefault();
     console.log('update user running')
     // const teamid = e.target.id[0]
     // this.setState({team_id: teamid})
     // const playerid = e.target.id.split(',')[1]
-    await this.setState({temp: e.target.id})
+    // this.setState({temp: e.target.id})
+
     const teamid = this.state.selectedTeam.id
-    this.setState({team_id: teamid})
-    const playerid = this.state.temp.split(',')[1]
+    // this.setState({team_id: teamid})
+    // const playerid = this.state.temp.split(',')[1]
     const params = {team_id: teamid}
     const player = this.state.allPlayers.find(player => player.id == playerid)
     await this.setState({updatedPlayer: player, team_id: teamid})
         if(this.state.updatedPlayer.team_id == null){
           
-          await updatePlayersTeam(playerid, params)
-          await this.updatePosition(e)
+          const update = await updatePlayersTeam(playerid, params)
+          console.log(update, 'updated player team_id')
+          await this.updatePosition(playerid)
           this.fetchTeamData(teamid);
         }
         else{
@@ -124,6 +130,7 @@ class Main extends Component {
       // await this.updateUserData();
       await this.setState({
         selectedTeam: team,
+        team_id: team.id,
         initalTeam: true
       })
       console.log('i dont even care what u say')
@@ -133,7 +140,7 @@ class Main extends Component {
     }
   }
 
-  updatePosition = async(e) => {
+  updatePosition = async(playerid) => {
     switch(this.state.updatedPlayer.position){
       case "QB" : 
             
@@ -160,13 +167,43 @@ class Main extends Component {
     }
   }
 
+  handleUpdate= async (e) => {
+    const playerid = e.target.id
+    await this.fetchUserData();
+    await this.updateUserData(playerid);
+    await this.updateStateOfUserTeam();
+    await this.fetchPlayerData();
+    
+    // console.log(selectedTeam, 'selected team in update')
+    // console.log('###############################')
+    // console.log(this.state.selectedTeam)
+  }
+
+  updateStateOfUserTeam = async () => {
+    const selectedTeam = await fetchTeam(this.state.team_id)
+    await this.setState({selectedTeam})
+    console.log(selectedTeam, 'updated team?')
+    this.setState(prevState => {
+      console.log('setting state?')
+      const newState = prevState
+      let team = prevState.user.teams.find(team => {
+        console.log('hello')
+        return team.id == prevState.team_id
+      })
+      let index = prevState.user.teams.indexOf(team)
+      console.log(index, 'this should return a number')
+      newState.user.teams[index] = selectedTeam
+      return newState
+    })
+    console.log('new team is set?', this.state.user.teams[0])
+  }
+
   
 
 
   render() {
     return (
-      <div>
-        test
+      <div className='bg'>
         <Switch>
           <Route 
             exact path='/'
@@ -192,13 +229,14 @@ class Main extends Component {
                     setLeagueId={this.setLeagueId}
                     fetchUserData={this.fetchUserData}
                     setSelectedTeam={this.setSelectedTeam}
-                    userTeams={this.state.user.teams}/>}
+                    userTeams={this.state.teams}/>}
               />
           <Route 
             exact path={`/teams/:id`}
             component={(props)=>
               <Team 
                 {...props}
+                updateStateOfUserTeam={this.updateStateOfUserTeam}
                 allPlayers={this.state.allPlayers}
                 setSelectedTeam={this.setSelectedTeam}
                 selectedTeam={this.state.selectedTeam}
@@ -209,6 +247,9 @@ class Main extends Component {
             component={(props)=>
               <WaiverWire 
                 {...props}
+                teams={this.state.teams}
+                handleUpdate={this.handleUpdate}
+                team_id={this.state.team_id}
                 fetchUserData={this.fetchUserData}
                 search={this.state.search}
                 allPlayers={this.state.allPlayers}
@@ -227,7 +268,21 @@ class Main extends Component {
                 allTeams={this.state.allTeams}
               />} 
           />
+          <Route 
+            exact path='/signup'
+            render={(props) => 
+              <SignUp 
+
+                fetchUserData={this.fetchUserData}
+                fetchUserData={this.fetchUserData}
+                leagues={this.state.leagues}
+                fetchSelectedTeamData={this.fetchSelectedTeamData}
+                allTeams={this.state.allTeams}
+              />} 
+          />
+
         </Switch>
+        {/* <SignUp /> */}
       </div>
     );
   }
