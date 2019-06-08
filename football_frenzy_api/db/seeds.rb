@@ -13,15 +13,14 @@
 User.create(email: 'test@test.com', password: 'test', commish: true)
 User.create(email: 'test2@test2.com', password: 'test2', commish: true)
 
-League.create(name: 'test league2', limit: 16, league_pin: 12345)
-League.create(name: 'test league', limit: 16, league_pin: 12345)
-League.create(name: 'test league3', limit: 16, league_pin: 12345)
-League.create(name: 'test league4', limit: 16, league_pin: 12345)
+League.create(name: 'Jeopardy', limit: 16, league_pin: 12345)
+League.create(name: 'Thunderbolt', limit: 16, league_pin: 12345)
+League.create(name: 'UX', limit: 16, league_pin: 12345)
+League.create(name: 'THE DALLAS COWBOYS', limit: 16, league_pin: 12345)
 
 dallas = Team.create(name: 'test nfl_team', points: 0)
-Team.create(name: 'test team2', points: 0, user_id: 1, league_id: 1)
-Team.create(name: 'test team3', points: 0, user_id: 1, league_id: 1)
-Team.create(name: 'test team4', points: 0, user_id: 1, league_id: 2)
+Team.create(name: 'Cowboys', points: 0, user_id: 1, league_id: 1)
+
 
 
 # PlayerPool.create(displayName: 'Tony Romo', nfl_team: 'DAL', position: 'QB', points: 0)

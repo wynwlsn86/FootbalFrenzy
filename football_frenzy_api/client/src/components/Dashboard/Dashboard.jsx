@@ -18,6 +18,7 @@ class Dashboard extends Component {
     const {allTeams} = this.props
     return (
       <div>
+        <h1>Leagues</h1>
         <div className="dashboard-container">
         {/* <img src={landingImage} alt='' /> */}
         {
@@ -29,7 +30,7 @@ class Dashboard extends Component {
                       state: {league},
                     }
                   }>
-                  <Button>{league.name}</Button>
+                  <button>{league.name}</button>
                 </Link>
           })
         }

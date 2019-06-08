@@ -12,10 +12,25 @@
   margin-top: 50px;
 }
 
+.team-leagues-container button {
+  background-color: navy;
+  color: white;
+  padding: 1em 2em;
+  box-shadow: 2px 2px 10px rgba(0,0,0,.4);
+  font-weight: 800;
+}
+
 .team-leagues-addteam {
   display: flex;
   justify-content: center;
   margin-top: 10px;
+}
+.team-leagues-addteam button {
+  background-color: navy;
+  color: white;
+  padding: 1em 2em;
+  box-shadow: 2px 2px 10px rgba(0,0,0,.4);
+  font-weight: 800;
 }
 
 button {

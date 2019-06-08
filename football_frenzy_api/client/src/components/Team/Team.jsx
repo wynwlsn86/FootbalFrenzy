@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import {Button} from 'semantic-ui-react';
 import {updateTeam, updatePlayersTeam, deleteTeam} from '../../services/apiServices';
 import League from '../League/League';
@@ -23,6 +23,7 @@ class Team extends Component {
     this.state = {
       removePlayer: null,
       updated: false,
+      isDeleted: false
     };
   }
 
@@ -35,6 +36,7 @@ class Team extends Component {
     console.log(id)
     let deletedTeam = await deleteTeam(id)
     console.log('deleted')
+    this.setState({isDeleted: true})
   }
   renderDeleteButton = (name, pos) => {
     if (name) {
@@ -73,96 +75,100 @@ class Team extends Component {
 
   render() {
     const {selectedTeam} = this.props;
-
-    return (
-      <div>
-        <Button>
-          <Link
-            to={{
-              pathname: `/waiverwire`,
-              state: {selectedTeam},
-            }}
-          >
-            <h1>Waiver Wire</h1>
-          </Link>
-        </Button>
-
-        <Button id={this.props.selectedTeam.id} onClick={this.handleDeleteTeam}>
-          <h1 id={this.props.selectedTeam.id}>Delete Team</h1>
-        </Button>
-
-        <div className="team-page-title">
-          <h1>{selectedTeam.name}</h1>
-        </div>
-        <div className="team-page-row">
-          <div className="team-page-column">
-            <li className="team-page-stats">
-              <div className="team-stat-color-qb">QB: {selectedTeam.qb}{' '}
-              {this.renderDeleteButton(selectedTeam.qb, 'qb')}</div>
-            </li>
-            <li className="team-page-stats">
-            <div className="team-stat-color-qb">
-              RB1: {selectedTeam.rb1}{' '}
-              {this.renderDeleteButton(selectedTeam.rb1, 'rb1')}</div>
-            </li>
-
-            <li className="team-page-stats">
-            <div className="team-stat-color-qb">
-              RB2: {selectedTeam.rb2}{' '}
-              {this.renderDeleteButton(selectedTeam.rb2, 'rb2')}</div>
-            </li>
-
-            <li className="team-page-stats">
-            <div className="team-stat-color-qb">
-              WR1: {selectedTeam.wr1}{' '}
-              {this.renderDeleteButton(selectedTeam.wr1, 'wr1')}</div>
-            </li>
-
-            <li className="team-page-stats">
-            <div className="team-stat-color-qb">
-              WR2: {selectedTeam.wr2}{' '}
-              {this.renderDeleteButton(selectedTeam.wr2, 'wr2')}</div>
-            </li>
-
-            <li className="team-page-stats">
-            <div className="team-stat-color-qb">
-              TE: {selectedTeam.te}{' '}
-              {this.renderDeleteButton(selectedTeam.te, 'te')}</div>
-            </li>
+    if(this.state.isDeleted){
+      return <Redirect to='/dashboard' />
+    }
+    else{
+      return (
+        <div className='team-page'>
+          <button className='waiver-button'>
+            <Link
+              to={{
+                pathname: `/waiverwire`,
+                state: {selectedTeam},
+              }}
+            >
+              <h1>Waiver Wire</h1>
+            </Link>
+          </button>
+  
+          <button className='delete-button' id={this.props.selectedTeam.id} onClick={this.handleDeleteTeam}>
+            <h1 id={this.props.selectedTeam.id}>Delete Team</h1>
+          </button>
+  
+          <div className="team-page-title">
+            <h1>{selectedTeam.name}</h1>
           </div>
-          <div className="team-page-column">
-            <li className="team-page-stats">
-            <div className="team-stat-color-qb">
-              FLEX: {selectedTeam.flex}{' '}
-              {this.renderDeleteButton(selectedTeam.flex, 'flex')}</div>
-            </li>
-
-            <li className="team-page-stats">
-            <div className="team-stat-color-qb">
-              DEF: {selectedTeam.def}{' '}
-              {this.renderDeleteButton(selectedTeam.def, 'def')}</div>
-            </li>
-
-            <li className="team-page-stats">
-            <div className="team-stat-color-qb">
-              K: {selectedTeam.k} {this.renderDeleteButton(selectedTeam.k, 'k')}</div>
-            </li>
-
-            <li className="team-page-stats">
-            <div className="team-stat-color-qb">
-              Bench 1: {selectedTeam.bn1}{' '}
-              {this.renderDeleteButton(selectedTeam.bn1, 'bn1')}</div>
-            </li>
-
-            <li className="team-page-stats">
-            <div className="team-stat-color-qb">
-              Bench 2: {selectedTeam.bn2}{' '}
-              {this.renderDeleteButton(selectedTeam.bn2, 'bn2')}</div>
-            </li>
+          <div className="team-page-row">
+            <div className="team-page-column">
+              <li className="team-page-stats">
+                <div className="team-stat-color-qb">QB: {selectedTeam.qb}{' '}
+                {this.renderDeleteButton(selectedTeam.qb, 'qb')}</div>
+              </li>
+              <li className="team-page-stats">
+              <div className="team-stat-color-qb">
+                RB1: {selectedTeam.rb1}{' '}
+                {this.renderDeleteButton(selectedTeam.rb1, 'rb1')}</div>
+              </li>
+  
+              <li className="team-page-stats">
+              <div className="team-stat-color-qb">
+                RB2: {selectedTeam.rb2}{' '}
+                {this.renderDeleteButton(selectedTeam.rb2, 'rb2')}</div>
+              </li>
+  
+              <li className="team-page-stats">
+              <div className="team-stat-color-qb">
+                WR1: {selectedTeam.wr1}{' '}
+                {this.renderDeleteButton(selectedTeam.wr1, 'wr1')}</div>
+              </li>
+  
+              <li className="team-page-stats">
+              <div className="team-stat-color-qb">
+                WR2: {selectedTeam.wr2}{' '}
+                {this.renderDeleteButton(selectedTeam.wr2, 'wr2')}</div>
+              </li>
+  
+              <li className="team-page-stats">
+              <div className="team-stat-color-qb">
+                TE: {selectedTeam.te}{' '}
+                {this.renderDeleteButton(selectedTeam.te, 'te')}</div>
+              </li>
+            </div>
+            <div className="team-page-column">
+              <li className="team-page-stats">
+              <div className="team-stat-color-qb">
+                FLEX: {selectedTeam.flex}{' '}
+                {this.renderDeleteButton(selectedTeam.flex, 'flex')}</div>
+              </li>
+  
+              <li className="team-page-stats">
+              <div className="team-stat-color-qb">
+                DEF: {selectedTeam.def}{' '}
+                {this.renderDeleteButton(selectedTeam.def, 'def')}</div>
+              </li>
+  
+              <li className="team-page-stats">
+              <div className="team-stat-color-qb">
+                K: {selectedTeam.k} {this.renderDeleteButton(selectedTeam.k, 'k')}</div>
+              </li>
+  
+              <li className="team-page-stats">
+              <div className="team-stat-color-qb">
+                Bench 1: {selectedTeam.bn1}{' '}
+                {this.renderDeleteButton(selectedTeam.bn1, 'bn1')}</div>
+              </li>
+  
+              <li className="team-page-stats">
+              <div className="team-stat-color-qb">
+                Bench 2: {selectedTeam.bn2}{' '}
+                {this.renderDeleteButton(selectedTeam.bn2, 'bn2')}</div>
+              </li>
+            </div>
           </div>
         </div>
-      </div>
-    );
+      );
+    }
   }
 }
 

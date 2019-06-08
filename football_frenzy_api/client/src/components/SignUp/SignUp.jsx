@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import {createTeam} from '../../services/apiServices'
+import {Redirect} from 'react-router-dom'
+import './SignUp.css'
 
 class SignUp extends Component {
   constructor(){
     super()
     this.state = {
       name: null,
-      leagueid: null
+      leagueid: null,
+      isCreated: false
     }
   }
 
@@ -22,6 +25,7 @@ class SignUp extends Component {
     let newTeam = await createTeam(params)
     console.log(newTeam, 'new team in front end')
     this.props.fetchUserData();
+    this.setState({isCreated: true})
 
   }
 
@@ -30,24 +34,35 @@ class SignUp extends Component {
     this.setState({ [name]: value });
   }
   render() {
-    return (
-      <div>
-        <h1>Create a Team</h1>
-        <form onSubmit={this.handleCreateTeam}>
-          <input 
-            type='text' 
-            placeholder='Team Name' 
-            name='name'
-            onChange={this.handleFormChange}/>
-          <input 
-            type='text' 
-            placeholder='League ID' 
-            name='leagueid'
-            onChange={this.handleFormChange}/>
-          <button type='submit'>Create a team</button>
-        </form>
-      </div>
-    );
+    if(this.state.isCreated){
+      return <Redirect to='/dashboard' />
+    }
+    else {
+      return (
+        <div>
+          <h1>Create a Team</h1>
+          
+          <form  onSubmit={this.handleCreateTeam}>
+          <div className='signup-input'>
+            <input 
+              type='text' 
+              placeholder='Team Name' 
+              name='name'
+              onChange={this.handleFormChange}/>
+            <input 
+              type='text' 
+              placeholder='League ID' 
+              name='leagueid'
+              onChange={this.handleFormChange}/>
+            </div>
+            <div className='signup-button'>
+            <button type='submit'>Create a team</button>
+            </div>
+          </form>
+        </div>
+      );
+    }
+
   }
 }
 

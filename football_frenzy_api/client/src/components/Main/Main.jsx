@@ -155,7 +155,12 @@ class Main extends Component {
           return (updateTeam(this.state.team_id, {rb2: this.state.updatedPlayer.displayName}))
         }
       case "WR" :
-          return (updateTeam(this.state.team_id, {wr1: this.state.updatedPlayer.displayName}))
+            if(!this.state.selectedTeam.wr1){
+              return (updateTeam(this.state.team_id, {wr1: this.state.updatedPlayer.displayName}))
+            }
+            else{
+              return (updateTeam(this.state.team_id, {wr2: this.state.updatedPlayer.displayName}))
+            }
       case "TE": 
           return (updateTeam(this.state.team_id, {te: this.state.updatedPlayer.displayName}))
       case "DEF":

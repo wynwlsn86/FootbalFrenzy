@@ -17,8 +17,8 @@ class WaiverWire extends Component {
   handleFilterSwitch = (e) => {
     this.setState({filter: e.target.id})
   }
-
   render() {
+    
     return (
       <div>
         <select type='option' onChange={this.handleFilterSwitch}>
@@ -36,63 +36,66 @@ class WaiverWire extends Component {
           />
         <div className='waiverwire-flex'>
           {
-            this.state.filter === 'name' ?  this.props.allPlayers.filter(player => {
-              return player.displayName.toLowerCase().includes(this.state.search.toLowerCase());
-            }).map((player, id) => 
-            <div id='playerCard'>
-            <i 
-              id={player.id}
-              className="pointer plus square icon" 
-              size='large'
-              onClick={this.props.handleUpdate}
-              // onClick={this.props.updateUserData}
-            >
-            </i> 
-            <div className="waiverwire-team-status"> 
-              <h4>Current Team: 
-                {
-                  player.team_id ? <h3>{
-                    this.props.teams.find(team => team.id == player.team_id).name
-                  }</h3> : <h3>Available</h3>
-                }
-              </h4>
+                  this.state.filter === 'name' ?  this.props.allPlayers.filter(player => {
+                    console.log(player.team_id, player.displayName)
+                    return player.displayName.toLowerCase().includes(this.state.search.toLowerCase());
+                  }).map((player, id) => 
+                  <div id='playerCard'>
+                  <i 
+                    id={player.id}
+                    className="pointer plus square icon" 
+                    size='large'
+                    onClick={this.props.handleUpdate}
+                    // onClick={this.props.updateUserData}
+                  >
+                  </i> 
+                  <div className="waiverwire-team-status"> 
+                    <h4>Current Team: 
+                      {
+                        Number.isInteger(player.team_id) ? <h3>
+                        {/* {
+                          this.props.teams.find(team => team.id == player.team_id).name
+                        } */}Taken
+                        </h3> : <h3>Available</h3>
+                      }
+                    </h4>
+                    </div>
+                    <div className="waiverwire-stats-container">
+                      <h3>Name: {player.displayName}</h3>
+                      <h4>Team: {player.nfl_team}</h4>
+                      <h4>Position: {player.position}</h4>
+                      <h4>College: {player.college}</h4>
+                    </div>
+                </div>
+                ).slice(0, 25) : this.props.allPlayers.filter(player => {
+                  return player.position.toLowerCase().includes(this.state.search.toLowerCase());
+                }).map((player, id) => 
+                <div id='playerCard'>
+                <i 
+                  id={player.id}
+                  className="pointer plus square icon" 
+                  size='large'
+                  onClick={this.props.handleUpdate}
+                  // onClick={this.props.updateUserData}
+                >
+                </i>
+                <div className="waiverwire-team-status"> 
+                  <h4>Current Team: 
+                    {
+                      player.team_id ? <h3>{
+                        this.props.teams.find(team => team.id == player.team_id).name
+                      }</h3> : <h3>Available</h3>
+                    }
+                  </h4>
+                  </div>
+                  <div className="waiverwire-stats-container">
+                    <h3>Name: {player.displayName}</h3>
+                    <h4>Team: {player.nfl_team}</h4>
+                    <h4>Position: {player.position}</h4>
+                    <h4>College: {player.college}</h4>
+                  </div>
               </div>
-              <div className="waiverwire-stats-container">
-                <h3>Name: {player.displayName}</h3>
-                <h4>Team: {player.nfl_team}</h4>
-                <h4>Position: {player.position}</h4>
-                <h4>College: {player.college}</h4>
-              </div>
-          </div>
-        ).slice(0, 25) : this.props.allPlayers.filter(player => {
-          return player.position.toLowerCase().includes(this.state.search.toLowerCase());
-        }).map((player, id) => 
-        <div id='playerCard'>
-        <i 
-          id={player.id}
-          className="pointer plus square icon" 
-          size='large'
-          onClick={this.props.handleUpdate}
-          // onClick={this.props.updateUserData}
-        >
-        </i>
-        <div className="waiverwire-team-status"> 
-          <h4>Current Team: 
-            {
-              player.team_id ? <h3>{
-                this.props.teams.find(team => team.id == player.team_id).name
-              }</h3> : <h3>Available</h3>
-            }
-          </h4>
-          </div>
-          <div className="waiverwire-stats-container">
-            <h3>Name: {player.displayName}</h3>
-            <h4>Team: {player.nfl_team}</h4>
-            <h4>Position: {player.position}</h4>
-            <h4>College: {player.college}</h4>
-          </div>
-      </div>
-    ).slice(0, 25) 
+            ).slice(0, 25) 
                 
           }
         </div>
