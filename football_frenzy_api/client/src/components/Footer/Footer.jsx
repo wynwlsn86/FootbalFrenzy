@@ -7,7 +7,7 @@ class Footer extends Component {
       <div className="footer-container">
         <footer>
           <div class="mui-container mui--text-center" >
-            Created by Wayne Wilson 2019
+            <p className="footer-content">Created by Wayne Wilson 2019</p>
           </div>
         </footer>
       </div>

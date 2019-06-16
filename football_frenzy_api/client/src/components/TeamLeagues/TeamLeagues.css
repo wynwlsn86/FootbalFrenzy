@@ -4,6 +4,10 @@
   font-size: 20px;
 }
 
+.title-center{
+  text-align: center;
+}
+
 .team-leagues-container {
   display: flex;
   justify-content: space-evenly;

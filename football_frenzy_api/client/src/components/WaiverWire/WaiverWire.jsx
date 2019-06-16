@@ -21,19 +21,22 @@ class WaiverWire extends Component {
     
     return (
       <div>
-        <select type='option' onChange={this.handleFilterSwitch}>
-          <option id='name'>name</option>
-          <option id='position'>position</option>
-        </select>
-        <input 
-          type='text' 
-          placeholder='Search...'
-          name='search'
-          onChange={this.handleFormChange}
-          value={this.props.search}
-          id='search'
-          key='search'
-          />
+        <div className='waiverwire-input'>
+          <select type='option' onChange={this.handleFilterSwitch}>
+            <option id='name'>name</option>
+            <option id='position'>position</option>
+          </select>
+        
+          <input 
+            type='text' 
+            placeholder='Search...'
+            name='search'
+            onChange={this.handleFormChange}
+            value={this.props.search}
+            id='search'
+            key='search'
+            />
+          </div>
         <div className='waiverwire-flex'>
           {
                   this.state.filter === 'name' ?  this.props.allPlayers.filter(player => {

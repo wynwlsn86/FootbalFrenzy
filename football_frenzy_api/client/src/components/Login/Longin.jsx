@@ -31,6 +31,11 @@ class Longin extends Component {
     return (
       <div>
         <h1 className="login-title">Login</h1>
+        <br/>
+        <br/>
+        <h3>  Dev Login: </h3>
+          <h4>Email: test@test.com</h4>
+          <h4>Password: test</h4>
         <form onSubmit={this.userLogin}>
           <div className="login-input">
           <input 

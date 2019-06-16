@@ -13,4 +13,11 @@ footer{
 
 .footer-container {
   min-height: 10vh;
+
+}
+
+.footer-content {
+  display: flex;
+  justify-content: center;
+padding-top: 10px;
 }

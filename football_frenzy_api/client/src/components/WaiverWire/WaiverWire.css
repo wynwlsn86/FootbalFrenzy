@@ -19,6 +19,16 @@
   cursor: pointer;
 }
 
+.waiverwire-input input {
+  padding: .6em 1em;
+  border-radius: 10px;
+  border: navy solid 2px;
+  box-shadow: 2px 2px 10px rgba(0,0,0,.4);
+  margin-top: 8px;
+  margin-left: 3px;
+}
+
+
 i {
   font-size: 1.8em !important;
   /* margin-left: -10px !important; */

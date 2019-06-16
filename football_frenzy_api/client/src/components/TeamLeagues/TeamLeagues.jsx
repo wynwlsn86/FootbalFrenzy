@@ -7,7 +7,9 @@ class TeamLeagues extends Component {
   render() {
     return (
       <div>
-        <h1 className="team-leagues-title">All Teams</h1>
+        <div className='title-center'>
+          <h1 className="team-leagues-title">All Teams</h1>
+        </div>
         <div className="team-leagues-container">
         {
         this.props.userTeams.map(team => {
