@@ -15,6 +15,8 @@ class CreateTeams < ActiveRecord::Migration[5.2]
       t.string :bn1
       t.string :bn2
       t.string :bn2
+      t.string :userId
+      
 
       t.timestamps
     end

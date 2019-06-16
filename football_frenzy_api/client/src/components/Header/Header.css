@@ -1,0 +1,52 @@
+/* header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 2;
+  background-color: black;
+}
+
+header ul.mui-list--inline {
+  margin-bottom: 0;
+} */
+
+.header {
+  background-color: navy;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 20vh;
+  padding: 10px;
+}
+
+.header-button {
+  width: 7vw;
+  height: 6vh;
+  font-size: 15px;
+}
+
+button {
+  outline: none;
+  border-radius: 10px;
+  border: none;
+  margin: 10px;
+}
+
+button:hover {
+  background-color: darkolivegreen;
+  color: white;
+}
+
+.header-nav {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.header-title {
+  display: flex;
+  justify-content: center;
+  color: white;
+
+}
+
