@@ -10,7 +10,7 @@ class Header extends Component {
         <div className="header-nav">
            <Link to='/'><button className="header-button">Home</button></Link>
           <Link to='/login'><button className="header-button">Login</button></Link>
-          <Link to='/signup'><button className="header-button">Signup</button></Link>
+          {/* <Link to='/signup'><button className="header-button">Signup</button></Link> */}
           <Link to='/dashboard'><button className="header-button">Dashboard</button></Link>
       </div>
       </div>

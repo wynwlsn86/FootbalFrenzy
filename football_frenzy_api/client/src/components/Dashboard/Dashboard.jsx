@@ -18,7 +18,7 @@ class Dashboard extends Component {
     const {allTeams} = this.props
     return (
       <div>
-        <h1>Leagues</h1>
+        <h1 className="dashboard-page-title">Leagues</h1>
         <div className="dashboard-container">
         {/* <img src={landingImage} alt='' /> */}
         {

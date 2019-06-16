@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   scope '/leagues/:league_id/team/:team_id' do
     resources :users
   end
+  
   scope '/teams/:team_id/' do
     resources :leagues
   end

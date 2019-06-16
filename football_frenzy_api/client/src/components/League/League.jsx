@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Button } from 'semantic-ui-react'
 import {Link} from 'react-router-dom'
 
+import "./League.css";
+
 class League extends Component {
   handleClick = (e, team) => {
     this.props.setLeagueId(e)
@@ -12,7 +14,7 @@ class League extends Component {
     // console.log(allTeams, 'allteams')
     return (
       <div>
-        <h1>Leagues</h1>
+        <h1 className="league-page-title">Leagues</h1>
         {
           this.props.leagues.map(team => {
             console.log(team)
