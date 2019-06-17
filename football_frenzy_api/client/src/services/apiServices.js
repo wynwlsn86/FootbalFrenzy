@@ -1,5 +1,5 @@
 import axios from 'axios'
-const URL = 'http://localhost:4567'
+const URL = 'https://footballfrenzyapi.herokuapp.com/'
 
 export const fetchAllUsers = async () => {
   try {
